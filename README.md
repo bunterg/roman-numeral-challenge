@@ -46,9 +46,35 @@ Project is based on multitier architecture to split logic on responsabilities
 - Logic Tier: `src/controller.js`
 - Data tier: `src/models`
 
-Testing methodology used unit testing and integration testing
+### Project requirements
 
-Web server is defined on entry point `src/index.js`
+- an endpoint `http://localhost:8080/romannumeral?query={integer}`
+- `query` parameter type integer between 1 and 255
+- `romannumeral` should return text with roman numeral value or send an error
+
+#### Project extension
+
+Extension 1:
+
+- ability to expand the `query` parameter limits to 3999
+
+Extension 2:
+
+- Vinculum addition using UTF-8
+- expand the `query` parameter limits to *2,200,000,000*
+
+### Testing methodology
+
+Integration Test:
+
+- Server should run on port `8080`
+- Server should have an `/romannumeral` endpoint for `GET` method
+- Server should return http erros `404` for every other endpoint
+- Server should return http status `200` or `400` on `/romannumeral`
+
+Unit testing:
+
+- Converter should be able to transform integer to roman numeral with limit values
 
 ## Packaging layout
 
@@ -77,6 +103,8 @@ Monolithic package with the following directory structure:
                 roman.js
                 
 ```
+
+Web server is defined on entry point `src/index.js`
 
 ## Dependencies
 
