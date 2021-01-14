@@ -4,7 +4,8 @@
   "description": "Http server with integer to roman numeral endpoint",
   "main": "src/index.js",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "cross-env NODE_ENV=production DEBUG=romannumeral:* node ./src/index.js",
+    "development": "cross-env NODE_ENV=test DEBUG=romannumeral:* nodemon ./bin/www",
     "unit-test": "mocha ./src/tests/unit/**/*.js",
     "integration-test": "mocha ./src/tests/integration/**/*.js",
     "test": "npm run unit-test && npm run integration-test"
@@ -22,7 +23,9 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "cross-env": "^7.0.3",
     "mocha": "^8.2.1",
+    "nodemon": "^2.0.7",
     "sinon": "^9.2.3"
   },
   "dependencies": {
