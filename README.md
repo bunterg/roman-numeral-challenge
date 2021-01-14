@@ -10,3 +10,4 @@
 - [mocha](https://mochajs.org/) Feature-rich JavaScript test framework
 - [chai](https://www.chaijs.com/) Chai is a BDD / TDD assertion library for node
 - [chai-http](https://www.chaijs.com/plugins/chai-http/) HTTP integration testing with Chai assertions.
+- [sinon](https://sinonjs.org/) Standalone test spies, stubs and mocks for JavaScript
