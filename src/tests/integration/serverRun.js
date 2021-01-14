@@ -36,7 +36,6 @@ describe('Server should run on port 8080', () => {
                 .request('http://localhost:8080')
                 .get('/unknowRoute')
                 .end((err, res) => {
-                    console.log(err, res)
                     res.should.have.status(404);
                     done();
                 });
@@ -48,6 +47,16 @@ describe('Server should run on port 8080', () => {
             chai
                 .request('http://localhost:8080')
                 .get('/romannumeral')
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    done();
+                });
+        })
+        it(`should send error 400 if there is query it's not a number`, done => {
+            chai
+                .request('http://localhost:8080')
+                .get('/romannumeral')
+                .query({query: 'NaN'})
                 .end((err, res) => {
                     res.should.have.status(400);
                     done();
