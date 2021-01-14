@@ -1,0 +1,24 @@
+{
+  "name": "roman-numeral-challenge",
+  "version": "1.0.0",
+  "description": "Http server with integer to roman numeral endpoint",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "unit-test": "mocha ./src/tests/unit/**/*.js",
+    "test": "npm run unit-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bunterg/roman-numeral-challenge.git"
+  },
+  "author": "Bernardo Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bunterg/roman-numeral-challenge/issues"
+  },
+  "homepage": "https://github.com/bunterg/roman-numeral-challenge#readme",
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
+}
