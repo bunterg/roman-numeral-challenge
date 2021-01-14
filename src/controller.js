@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var { convertIntegerToRoman } = require('./models/roman')
 
 /**
  * 
@@ -8,7 +9,7 @@ var createError = require('http-errors');
  */
 module.exports.romannumeral =  (req, res, next) => {
 
-    if(!req.query.query) {
+    if(!req.query || !req.query.query) {
         next(createError(400, 'Requires query param'));
         return;
     }
@@ -19,5 +20,13 @@ module.exports.romannumeral =  (req, res, next) => {
         return;
     }
 
-    res.sendStatus(200)
+    let romanNumeral;
+    try {
+        romanNumeral = convertIntegerToRoman(query)
+    } catch(err) {
+        next(createError(400, 'Query must be between 1 and 255'));
+    }
+
+    res.status(200);
+    res.send(romanNumeral);
 }
