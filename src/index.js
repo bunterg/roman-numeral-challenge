@@ -3,9 +3,9 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+const controller = require('./controller');
+
+app.get('/romannumeral', controller.romannumeral)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -18,11 +18,14 @@ app.use(function (err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
+    // send the error message
     res.status(err.status || 500);
-    res.render('error');
+    res.json('error');
 });
 
-app.listen(port, () => {
+var server = app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
+
+module.exports = server;
