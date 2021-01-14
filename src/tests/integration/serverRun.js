@@ -48,17 +48,31 @@ describe('Server should run on port 8080', () => {
                 .request('http://localhost:8080')
                 .get('/romannumeral')
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     res.should.have.status(400);
                     done();
                 });
-        })
+        });
         it(`should send error 400 if there is query it's not a number`, done => {
             chai
                 .request('http://localhost:8080')
                 .get('/romannumeral')
-                .query({query: 'NaN'})
+                .query({ query: 'NaN' })
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     res.should.have.status(400);
+                    done();
+                });
+        });
+        it(`should response with roman numeral I when query = 1`, done => {
+            chai
+                .request('http://localhost:8080')
+                .get('/romannumeral')
+                .query({ query: 1 })
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    res.text.should.be.eql('I')
+                    res.should.have.status(200);
                     done();
                 });
         })
