@@ -42,6 +42,24 @@ describe('romannumeral', () => {
         expect(next.calledOnce).to.be.true;
     });
 
+    it('should call next with error if query is a float', () => {
+        const req = {
+            query: {
+                query: 1.1
+            }
+        }
+        const res = {
+            status: sinon.spy(),
+            send: sinon.spy()
+        };
+
+        const next = sinon.spy()
+
+        controller.romannumeral(req, res, next);
+
+        expect(next.calledOnce).to.be.true;
+    });
+
     it('should call next with error if query is not between 1 and 255', () => {
         const req = {
             query: {

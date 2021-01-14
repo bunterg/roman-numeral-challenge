@@ -15,7 +15,7 @@ module.exports.romannumeral =  (req, res, next) => {
     }
 
     let query = parseInt(req.query.query, 10);
-    if(isNaN(query)) {
+    if(isNaN(query) || query !== parseFloat(req.query.query, 10) ) {
         next(createError(400, 'Query must be Integer'));
         return;
     }
