@@ -63,6 +63,15 @@ Extension 2:
 - Vinculum addition using UTF-8
 - expand the `query` parameter limits to *2,200,000,000*
 
+Valid character set:
+
+```text
+    I V X L C D M
+    I̅ V̅ X̅ L̅ C̅ D̅ M̅ vinculum x 1,000,000
+    I̿ V̿ X̿ L̿ C̿ D̿ M̿ vinculum double x 1,000,000
+```
+
+
 ### Testing methodology
 
 Integration Test:
