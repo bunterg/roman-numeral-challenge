@@ -14,4 +14,18 @@ describe('convertIntegerToRoman', function () {
         assert.throws(() => convertIntegerToRoman(256), RangeError)
         assert.throws(() => convertIntegerToRoman(0), RangeError)
     });
-})
+
+    describe('Extension1: expand limit to 3999', function() {
+        it('Should return roman  number between 1 and 3999', function() {
+            assert.strictEqual(convertIntegerToRoman(1, 1), 'I');
+            assert.strictEqual(convertIntegerToRoman(256, 1), 'CCLVI');
+            assert.strictEqual(convertIntegerToRoman(3999, 1), 'MMMCMXCIX');
+        })
+    
+        it('Should throw range error when number is out of bound', function() {
+            assert.throws(() => convertIntegerToRoman(-1, 1), RangeError)
+            assert.throws(() => convertIntegerToRoman(4000, 1), RangeError)
+            assert.throws(() => convertIntegerToRoman(0, 1), RangeError)
+        });
+    });
+});
