@@ -95,4 +95,46 @@ describe('romannumeral', () => {
         expect(res.send.calledWith('I')).to.be.true;
         expect(res.status.calledWith(200)).to.be.true;
     });
+
+    it('should call send with roman numeral using extension 1', () => {
+        const req = {
+            query: {
+                query: 3999,
+                extension: 1
+            }
+        }
+        const res = {
+            status: sinon.spy(),
+            send: sinon.spy()
+        };
+        const next = sinon.spy()
+
+        controller.romannumeral(req, res, next);
+
+        expect(next.notCalled).to.be.true;
+        expect(res.send.calledOnce).to.be.true;
+        expect(res.send.calledWith('MMMCMXCIX')).to.be.true;
+        expect(res.status.calledWith(200)).to.be.true;
+    });
+
+    it('should call send with roman numeral using extension 2', () => {
+        const req = {
+            query: {
+                query: 4000000,
+                extension: 2
+            }
+        }
+        const res = {
+            status: sinon.spy(),
+            send: sinon.spy()
+        };
+        const next = sinon.spy()
+
+        controller.romannumeral(req, res, next);
+
+        expect(next.notCalled).to.be.true;
+        expect(res.send.calledOnce).to.be.true;
+        expect(res.send.calledWith('I̿V̿')).to.be.true;
+        expect(res.status.calledWith(200)).to.be.true;
+    });
 });

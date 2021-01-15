@@ -20,9 +20,11 @@ module.exports.romannumeral =  (req, res, next) => {
         return;
     }
 
+    let extension = parseInt(req.query.extension) || 0;
+
     let romanNumeral;
     try {
-        romanNumeral = convertIntegerToRoman(query)
+        romanNumeral = convertIntegerToRoman(query, extension)
     } catch(err) {
         next(createError(400, 'Query must be between 1 and 255'));
     }
