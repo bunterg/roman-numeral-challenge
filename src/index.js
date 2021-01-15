@@ -1,9 +1,28 @@
 var createError = require('http-errors');
 const express = require('express');
+var morgan = require('morgan');
+var path = require('path');
+var rfs = require('rotating-file-stream');
+
 const app = express();
 const port = 8080;
 
 const controller = require('./controller');
+
+// Setup service logging
+if(process.env.NODE_ENV == 'production') {
+    // create a rotating write stream
+    var accessLogStream = rfs.createStream('access.log', {
+        interval: '1d', // rotate daily
+        path: path.join(__dirname, '..', 'log')
+    })
+    
+    // setup the logger
+    app.use(morgan('combined', { stream: accessLogStream }))
+} else {
+    // setup the logger
+    app.use(morgan('dev'))
+}
 
 app.get('/romannumeral', controller.romannumeral)
 

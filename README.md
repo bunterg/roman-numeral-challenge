@@ -130,6 +130,11 @@ Web server is defined on entry point `src/index.js`
 [http-errors](https://github.com/jshttp/http-errors)
 : Create HTTP errors for Express
 
+[rotating-file-stream](https://github.com/iccicci/rotating-file-stream#readme)
+: Creates a stream.Writable to a file which is rotated.
+
+[Morgan](https://github.com/expressjs/morgan#readme)
+: HTTP request logger middleware for node.js
 ### Development Dependencies
 
 [mocha](https://mochajs.org/)
