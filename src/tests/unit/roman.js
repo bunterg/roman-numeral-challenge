@@ -28,4 +28,23 @@ describe('convertIntegerToRoman', function () {
             assert.throws(() => convertIntegerToRoman(0, 1), RangeError)
         });
     });
+
+    describe('Extension2: expand limit to 3999', function() {
+        it('Should return roman  number between 1 and 3999', function() {
+            assert.strictEqual(convertIntegerToRoman(1, 2), 'I');
+            assert.strictEqual(convertIntegerToRoman(256, 2), 'CCLVI');
+            assert.strictEqual(convertIntegerToRoman(3999, 2), 'MMMCMXCIX');
+            assert.strictEqual(convertIntegerToRoman(4000, 2), 'I̅V̅');
+            assert.strictEqual(convertIntegerToRoman(3999999, 2), 'M̅M̅​M̅C̅M̅X̅C̅​I̅X̅CMXCIX');
+            assert.strictEqual(convertIntegerToRoman(4000000, 2), 'I̿V̿');
+            assert.strictEqual(convertIntegerToRoman(40002999, 2), 'I̿V̿MMCMXCIX');
+            assert.strictEqual(convertIntegerToRoman(2200000000, 2), 'M̿M̿C̿C̿');
+        })
+    
+        it('Should throw range error when number is out of bound', function() {
+            assert.throws(() => convertIntegerToRoman(-1, 2), RangeError)
+            assert.throws(() => convertIntegerToRoman(2200000001, 2), RangeError)
+            assert.throws(() => convertIntegerToRoman(0, 2), RangeError)
+        });
+    });
 });
