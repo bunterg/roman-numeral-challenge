@@ -14,6 +14,11 @@ const romanScaleLowerLimit = [0, 3999, 3999999];
 
 const extensionLimit = [255, 3999, 2200000000];
 
+const vinculumUTF8 = [
+    Buffer.from([0xCC, 0x85]), //single vinculum
+    Buffer.from([0xCC, 0xBF]) //double vinculum
+]
+
 
 /**
  * Transform to roman numeral within scale
@@ -28,7 +33,7 @@ function toRomanNumeral(num, scale = 0) {
     let limit = romanScaleLowerLimit[scale];
     let multiplier = romanScaleMultiplier[scale];
 
-    while(num > limit) {
+    while (num > limit) {
         for (var i = 0; i < arabicList.length; i++) {
             let arabic = arabicList[i] * multiplier;
             if (num >= arabic) {
@@ -38,17 +43,30 @@ function toRomanNumeral(num, scale = 0) {
             }
         }
     }
-    
+
     return [num, romanNumeral];
 }
 
+/**
+ * Add vinculum to character
+ * 
+ * @param {string} char character to modify
+ * @param {(0, 1)} vinculumType (0, single) or (1, double) vinculum
+ */
+function addVinculumToCharracter(char, vinculumType) {
+    const vinculum = vinculumUTF8[vinculumType];
+
+    const charBuff = Buffer.from(char, 'utf-8');
+    const buff = Buffer.concat([charBuff, vinculum]);
+    return decoder.write(buff);
+}
 
 
 /**
  * Transform any integer from 1 to 255 to roman numeral string
  * 
  * @param {number} num - integer to be transform
- * @param {(0, 1)} extension - extension to be used, change the limit of maximun num value 0 => 255 1 => 3999 2 => 2200000000
+ * @param {(0, 1, 2)} extension - extension to be used, change the limit of maximun num value 0 => 255 1 => 3999 2 => 2200000000
  * @returns {string} roman numeral
  * @throws {RangeError} 
  */
@@ -58,7 +76,22 @@ exports.convertIntegerToRoman = function (num, extension = 0) {
         throw new RangeError(`The argument must be between 1 and ${extensionLimit[extension]}.`)
     }
 
-    let [_, romanNumeral] = toRomanNumeral(num);
+    let romanNumeral = '';
+
+    if (num > romanScaleLowerLimit[2]) {
+        let [remaining, romanNumeralSegment] = toRomanNumeral(num, 2);
+        num = remaining;
+        romanNumeral += romanNumeralSegment.split('').map(x => addVinculumToCharracter(x, 1)).join('')
+    }
+
+    if (num > romanScaleLowerLimit[1]) {
+        let [remaining, romanNumeralSegment] = toRomanNumeral(num, 1);
+        num = remaining;
+        romanNumeral += romanNumeralSegment.split('').map(x => addVinculumToCharracter(x, 0)).join('')
+    }
+
+    let [_, romanNumeralSegment] = toRomanNumeral(num);
+    romanNumeral += romanNumeralSegment;
 
     return romanNumeral;
 }

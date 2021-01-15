@@ -35,9 +35,9 @@ describe('convertIntegerToRoman', function () {
             assert.strictEqual(convertIntegerToRoman(256, 2), 'CCLVI');
             assert.strictEqual(convertIntegerToRoman(3999, 2), 'MMMCMXCIX');
             assert.strictEqual(convertIntegerToRoman(4000, 2), 'I̅V̅');
-            assert.strictEqual(convertIntegerToRoman(3999999, 2), 'M̅M̅​M̅C̅M̅X̅C̅​I̅X̅CMXCIX');
+            assert.strictEqual(convertIntegerToRoman(3999999, 2), 'M̅M̅M̅C̅M̅X̅C̅I̅X̅CMXCIX');
             assert.strictEqual(convertIntegerToRoman(4000000, 2), 'I̿V̿');
-            assert.strictEqual(convertIntegerToRoman(40002999, 2), 'I̿V̿MMCMXCIX');
+            assert.strictEqual(convertIntegerToRoman(4002999, 2), 'I̿V̿MMCMXCIX');
             assert.strictEqual(convertIntegerToRoman(2200000000, 2), 'M̿M̿C̿C̿');
         })
     
