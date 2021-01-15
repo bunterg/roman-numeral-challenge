@@ -71,6 +71,13 @@ Valid character set:
     I̿ V̿ X̿ L̿ C̿ D̿ M̿ vinculum double x 1,000,000
 ```
 
+### Examples
+
+```text
+GET 'http://localhost:8080/romannumeral?query=58' // LVIII
+GET 'http://localhost:8080/romannumeral?query=3999&extension=1' // MMMCMXCIX
+GET 'http://localhost:8080/romannumeral?query=4000000&extension=2' // I̿V̿
+```
 
 ### Testing methodology
 
